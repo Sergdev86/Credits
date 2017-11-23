@@ -9,7 +9,6 @@ public class Phonenumber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "phonenumber")
     private String phonenumber;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")

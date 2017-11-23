@@ -11,13 +11,9 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //@Column(name = "firstname")
     private String firstName;
-    //@Column(name = "lastname")
     private String lastName;
-    //@Column(name = "birthdate")
     private Date birthdate;
-    //@Column(name = "email")
     private String email;
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Phonenumber> phonenumbers;
@@ -78,14 +74,32 @@ public class Client {
         this.email = email;
     }
 
+    public List<Phonenumber> getPhonenumbers() {
+        return phonenumbers;
+    }
+
+    public void addPhonenumber(Phonenumber phonenumber) {
+        phonenumbers.add(phonenumber);
+    }
+
+    public List<Creditline> getCreditlines() {
+        return creditlines;
+    }
+
+    public void addCreditline(Creditline creditline) {
+        creditlines.add(creditline);
+    }
+
     @Override
     public String toString() {
-        return "Creditline{" +
+        return "Client{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthdate=" + birthdate +
                 ", email='" + email + '\'' +
+                ", phonenumbers=" + phonenumbers +
+                ", creditlines=" + creditlines +
                 '}';
     }
 }
