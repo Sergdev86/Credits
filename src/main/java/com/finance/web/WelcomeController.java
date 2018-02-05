@@ -2,14 +2,16 @@ package com.finance.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class WelcomeController {
 
-    @GetMapping(path="/welcome")
-    public String getStartPage(Model model){
-        model.addAttribute("name", "Frank");
+/*   @RequestMapping(value="/welcome", method = RequestMethod.GET)
+    public String getWelcomePage(Model model){
+        model.addAttribute("message", "Some message");
         return "welcome";
-    }
+    }*/
 }

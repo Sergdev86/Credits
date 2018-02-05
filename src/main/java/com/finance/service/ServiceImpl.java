@@ -10,29 +10,36 @@ import com.finance.repository.CreditlineDAO;
 import com.finance.repository.PhonenumberDAO;
 import com.finance.repository.RoleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service("serviceImpl")
 public class ServiceImpl implements ClientService, CreditlineService, PhonenumberService {
 
     @Autowired
     private ClientDAO clientDao;
+
+    @Qualifier("creditlineDAO")
     @Autowired
     private CreditlineDAO creditlineDao;
+    @Qualifier("phonenumberDAO")
     @Autowired
-    private PhonenumberDAO phonenumberdao;
+    private PhonenumberDAO phonenumberDao;
+    @Qualifier("roleDAO")
     @Autowired
-    private RoleDAO roledao;
+    private RoleDAO roleDao;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Client createClient(Client client) {
         client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
         Set<Role> roles = new HashSet<Role>();
-        roles.add(roledao.findOne(1L));
+        roles.add(roleDao.findOne(2L));
         client.setRoles(roles);
         return clientDao.saveAndFlush(client);
     }
@@ -74,7 +81,7 @@ public class ServiceImpl implements ClientService, CreditlineService, Phonenumbe
     }
 
     public Client findClientByPhonenumber(String phonenumber) {
-        Phonenumber phonenumberObj = phonenumberdao.findByPhonenumber(phonenumber);
+        Phonenumber phonenumberObj = phonenumberDao.findByPhonenumber(phonenumber);
         return phonenumberObj.getClient();
     }
 
