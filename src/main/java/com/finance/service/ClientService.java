@@ -12,6 +12,7 @@ public interface ClientService {
     void deleteClient(Long id);
     void updateClient(Client client);
     void openNewCreditline(Client client, Creditline creditline);
-    Client findClient(String lastName);
-    List<Client> getAllClient();
+    Client findClientByLastname(String lastName);
+    List<Client> getAllClients();
+    Client findClientByPhonenumber(String phonenumber);
 }

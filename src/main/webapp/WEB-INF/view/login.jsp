@@ -17,16 +17,16 @@
             <div class="main-login-form">
                 <div class="login-group">
                     <div class="form-group">
-                        <label for="lg_username" class="sr-only">Username</label>
-                        <input type="text" class="form-control" id="lg_username" name="clientname" placeholder="username">
+                        <label for="id_phonenumber" class="sr-only">Phonenumber</label>
+                        <input type="text" class="form-control" id="id_phonenumber" name="phonenumber" placeholder="phonenumber">
                     </div>
                     <div class="form-group">
-                        <label for="lg_password" class="sr-only">Password</label>
-                        <input type="password" class="form-control" id="lg_password" name="password" placeholder="password">
+                        <label for="id_password" class="sr-only">Password</label>
+                        <input type="password" class="form-control" id="id_password" name="password" placeholder="password">
                     </div>
                     <div class="form-group login-group-checkbox">
-                        <input type="checkbox" id="lg_remember" name="j_remember">
-                        <label for="lg_remember">remember</label>
+                        <input type="checkbox" id="id_remember" name="remember">
+                        <label for="id_remember">remember</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

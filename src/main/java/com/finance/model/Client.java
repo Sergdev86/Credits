@@ -12,14 +12,13 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private Date birthdate;
     private String email;
-    private String login;
     private String password;
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private List<Phonenumber> phonenumbers;
+    private String phonenumber;
+
     @ManyToMany
     @JoinTable(name = "clients_creditlines",
             joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
@@ -34,13 +33,13 @@ public class Client {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, Date birthdate, String email, String login, List<Phonenumber> phonenumbers) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Client(String firstname, String lastname, Date birthdate, String email, String phonenumber, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.birthdate = birthdate;
         this.email = email;
-        this.login = login;
-        this.phonenumbers = phonenumbers;
+        this.phonenumber = phonenumber;
+        this.password = password;
     }
 
     public long getId() {
@@ -51,20 +50,20 @@ public class Client {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Date getBirthdate() {
@@ -83,21 +82,7 @@ public class Client {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public List<Phonenumber> getPhonenumbers() {
-        return phonenumbers;
-    }
-
-    public void addPhonenumber(Phonenumber phonenumber) {
-        phonenumbers.add(phonenumber);
-    }
+    public void addPhonenumber(String phonenumber) {this.phonenumber = phonenumber; }
 
     public List<Creditline> getCreditlines() {
         return creditlines;
@@ -119,10 +104,6 @@ public class Client {
         this.password = password;
     }
 
-    public void setPhonenumbers(List<Phonenumber> phonenumbers) {
-        this.phonenumbers = phonenumbers;
-    }
-
     public void setCreditlines(List<Creditline> creditlines) {
         this.creditlines = creditlines;
     }
@@ -135,17 +116,19 @@ public class Client {
         this.roles = roles;
     }
 
+    public String getPhonenumber() { return phonenumber; }
+
+    public void setPhonenumber(String phonenumber) {this.phonenumber = phonenumber; }
 
     @Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", birthdate=" + birthdate +
                 ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
-                ", phonenumbers=" + phonenumbers +
+                ", phonenumber=" + phonenumber +
                 ", creditlines=" + creditlines +
                 ", roles=" + roles +
                 '}';

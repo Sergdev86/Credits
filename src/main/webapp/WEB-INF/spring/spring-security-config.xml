@@ -12,17 +12,18 @@
         <intercept-url pattern="/user" access="ROLE_USER, ROLE_ADMIN"/>
 
         <form-login login-page="/login" default-target-url="/welcome"
-                    username-parameter="clientname" password-parameter="password"/>
+                    username-parameter="phonenumber" password-parameter="password"/>
 
+        <logout logout-success-url="/login?logout"/>
         <!--<http-basic/>    -->
         <logout logout-success-url="/login"/>
         <!--<remember-me />-->
-        <!--<headers/>-->
         <csrf disabled="true"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
+        <authentication-provider user-service-ref = "userDetailsServiceImpl">
+            <password-encoder ref = "encoder"></password-encoder>
             <user-service>
                 <user name="user" password="user" authorities="ROLE_USER" />
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
@@ -32,5 +33,8 @@
 
     <beans:bean id = "encoder"
             class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+    <beans:bean id = "userDetailsServiceImpl"
+                class = "com.finance.service.UserDetailsServiceImpl"></beans:bean>
 
 </beans:beans>

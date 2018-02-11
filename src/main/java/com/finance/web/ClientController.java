@@ -1,6 +1,7 @@
 package com.finance.web;
 
 import com.finance.model.Client;
+import com.finance.service.SecurityService;
 import com.finance.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ClientController {
 
 
+    @Autowired
+    private ServiceImpl service;
+
         @Autowired
-        private ServiceImpl service;
+        private SecurityService securityService;
 
 /*        @Autowired
-        private SecurityService securityService;*/
+        private UserValidator userValidator;*/
 
-//        @Autowired
-//        private UserValidator userValidator;
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String index(Model model) {
+        return "login";
+    }
 
-        @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-        public String index(Model model) {
-            return "login";
-        }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
 
-        @RequestMapping(value = "/login", method = RequestMethod.GET)
-        public String login(Model model) {
+        return "login";
+    }
 
-            return "login";
-        }
-
-        @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-        public String welcomep(Model model) {
+    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+    public String welcomep(Model model) {
             return "welcome";
         }
 
 
-        @RequestMapping(value = "/user", method = RequestMethod.GET)
-        public String user(Model model) {
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String user(Model model) {
             return "user";
         }
 
@@ -72,7 +73,7 @@ public class ClientController {
 
         service.createClient(clientForm);
 //
-//            securityService.autoLogin(clientForm.getLogin(), clientForm.getPassword());
+            securityService.autoLogin(clientForm.getPhonenumber(), clientForm.getPassword());
 
         return "redirect:/welcome";
     }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
-@Repository
+
 public interface RoleDAO extends CrudRepository<Role, Long>{
 }
