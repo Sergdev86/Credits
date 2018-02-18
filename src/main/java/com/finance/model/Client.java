@@ -42,11 +42,11 @@ public class Client {
         this.password = password;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -90,10 +90,6 @@ public class Client {
 
     public void addCreditline(Creditline creditline) {
         creditlines.add(creditline);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getPassword() {

@@ -1,9 +1,9 @@
 <html>
 <body>
-<h2>Hello World!!!</h2>
+<h2>Index page</h2>
 <br>
 <br>
 
-<a href="/welcomePage">Greeting</a>
+<a href="/init">Init</a>
 </body>
 </html>

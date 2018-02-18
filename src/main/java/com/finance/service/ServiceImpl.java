@@ -35,7 +35,10 @@ public class ServiceImpl implements ClientService, CreditlineService {
     public Client createClient(Client client) {
         client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
         Set<Role> roles = new HashSet<Role>();
-        roles.add(roleDAO.findOne(2L));
+        if(client.getFirstname().equals("admin"))
+            roles.add(roleDAO.findOne(1L));
+        else
+            roles.add(roleDAO.findOne(2L));
         client.setRoles(roles);
         return clientDAO.saveAndFlush(client);
     }

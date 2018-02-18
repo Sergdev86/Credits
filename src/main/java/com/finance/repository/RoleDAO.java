@@ -10,4 +10,6 @@ import java.util.Set;
 
 
 public interface RoleDAO extends CrudRepository<Role, Long>{
+    Role findByname(String name);
+    Role saveAndFlush(Role role);
 }

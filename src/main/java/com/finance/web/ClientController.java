@@ -1,6 +1,9 @@
 package com.finance.web;
 
 import com.finance.model.Client;
+import com.finance.model.Role;
+import com.finance.repository.ClientDAO;
+import com.finance.repository.RoleDAO;
 import com.finance.service.SecurityService;
 import com.finance.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Controller
 public class ClientController {
 
@@ -18,8 +25,14 @@ public class ClientController {
     @Autowired
     private ServiceImpl service;
 
-        @Autowired
-        private SecurityService securityService;
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private RoleDAO roleDAO;
+
+    @Autowired
+    private ClientDAO clientDAO;
 
 /*        @Autowired
         private UserValidator userValidator;*/
@@ -72,9 +85,26 @@ public class ClientController {
         }
 
         service.createClient(clientForm);
-//
-            securityService.autoLogin(clientForm.getPhonenumber(), clientForm.getPassword());
+
+        securityService.autoLogin(clientForm.getPhonenumber(), clientForm.getPassword());
 
         return "redirect:/welcome";
+    }
+
+    @RequestMapping(value = "/init", method = RequestMethod.GET)
+    private String init(Model model){
+        List<Client> clients = new ArrayList<Client>();
+        roleDAO.saveAndFlush(new Role("ROLE_ADMIN"));
+        roleDAO.saveAndFlush(new Role("ROLE_USER"));
+        Date currentDate = new Date();
+        clients.add(new Client("admin", "admin", currentDate, "admin", "admin", "admin"));
+        for(int i=1; i<3; i++){
+            clients.add(new Client("user_"+i, "user_"+i, currentDate, "user_"+i, "user_"+i, "user_"+i));
+        }
+        for(Client client: clients){
+            clientDAO.saveAndFlush(client);
+            service.createClient(client);
+        }
+        return "login";
     }
 }
